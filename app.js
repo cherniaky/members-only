@@ -3,8 +3,11 @@ require("dotenv").config();
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
+const session = require("express-session");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var engine = require("ejs-locals");
+const passport = require("passport");
 
 var indexRouter = require("./routes/index");
 
@@ -18,8 +21,23 @@ var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // view engine setup
+app.set("view options", { layout: "layout.ejs" });
+app.engine("ejs", engine);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+app.use(
+    session({
+        secret: "cats",
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 2,
+        },
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(logger("dev"));
 app.use(express.json());

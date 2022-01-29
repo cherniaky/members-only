@@ -1,0 +1,22 @@
+<% layout('layout') -%>
+    <section class="title">
+        <h1 class="form-header">
+            <%= title %>
+        </h1>
+        <% if (typeof user !='undefined' ){ %>
+            hi
+        <%}%>
+    </section>
+
+    <% if (message_list.length !=0){ %>
+        <ul>
+            <% message_list.forEach( function(message){ %>
+                <li>
+                    <%=message.text%>
+                </li>
+                <%})%>
+        </ul>
+        <%}else{ %>
+            No message yet
+            <%} %>
+                <a href="/sign-up">Sign up</a>

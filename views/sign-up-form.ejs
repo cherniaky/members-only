@@ -1,0 +1,41 @@
+<% layout('layout') -%>
+    <section class="title">
+        <h1 class="form-header">
+            <%= title %>
+        </h1>
+    </section>
+
+    <section class="form-section">
+        <form action="" method="POST">
+            <fieldset>
+                <legend>USERNAME</legend>
+                <input required type="text" name="username" id="username" maxlength="30"
+                    value="<%=  (typeof user !='undefined' )? user.username : '' %>" />
+            </fieldset>
+            <fieldset>
+                <legend>PASSWORD</legend>
+                <input required name="password" id="password" maxlength="30"
+                    value="<%=  (typeof user !='undefined' )? user.password : '' %>" />
+            </fieldset>
+
+            <fieldset class="<%=  (typeof confpassword !='undefined' )? 'red' : 'normal' %>">
+                <legend>CONFIRMPASSWORD</legend>
+                <input type="password" name="confpassword" id="conf-password" required>
+            </fieldset>
+
+            <% if (typeof errors !='undefined' ) { %>
+                <ul>
+                    <% errors.forEach(err=> { %>
+                        <li class="errorMsg">
+                            <%= err %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
+                    <button type="submit" class="yellow-btn block">Submit</button>
+        </form>
+
+
+
+        <a class="cancel block" href="/">Cancel</a>
+    </section>
