@@ -1,0 +1,29 @@
+<% layout('layout') -%>
+    <section class="title">
+        <h1 class="form-header">
+            <%= title %>
+        </h1>
+    </section>
+
+    <section class="form-section">
+
+        <form action="/log-in" method="POST">
+            <fieldset>
+                <legend>USERNAME</legend>
+                <input required name="username" placeholder="username" type="text" maxlength="30" />
+            </fieldset>
+
+            <fieldset>
+                <legend>PASSWORD</legend>
+                <input required name="password" id="password" maxlength="30" />
+            </fieldset>
+
+            <button>Log In</button>
+
+        </form>
+
+
+
+
+        <a class="cancel block" href="/">Cancel</a>
+    </section>

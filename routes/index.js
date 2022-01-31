@@ -15,11 +15,13 @@ let path = require("path");
 
 const userController = require("../controllers/userController");
 
-
 /* GET home page. */
 router.get("/", function (req, res, next) {
     Message.find().exec(function (err, message_list) {
         if (err) return next(err);
+
+        //console.log(req.user);
+        //console.log(req.session.passport);
 
         res.render("main", {
             title: "Messages",
@@ -33,17 +35,25 @@ router.get("/sign-up", userController.user_sign_up_get);
 
 router.post("/sign-up", userController.user_sign_up_post);
 
+router.get("/log-in", userController.user_log_in_get);
+
 router.post(
     "/log-in",
     passport.authenticate("local", {
-        successRedirect: "/sign-up",
-        failureRedirect: "/",
+        successRedirect: "/",
+        failureRedirect: "/log-in",
     })
 );
 
-router.get("/log-out", (req, res) => {
-    req.logout();
-    res.redirect("/");
+router.post("/log-out", (req, res) => {
+    req.session.destroy(function (err) {
+        res.redirect("/");
+    });
+    // req.logout();
 });
+
+router.get("/become-member", userController.user_become_member_get);
+
+router.post("/become-member", userController.user_become_member_post);
 
 module.exports = router;

@@ -1,0 +1,22 @@
+<% layout('layout') -%>
+    <section class="title">
+        <h1 class="form-header">
+            <%= title %>
+        </h1>
+    </section>
+    <form action="" method="post">
+        <fieldset>
+            <legend><%= type %>  password</legend>
+
+            <input type="text" name="memberpassword" placeholder="<%= type %>  password">
+
+          
+        </fieldset>
+        <% if (typeof error != 'undefined') { %>
+            <ul>
+                <li><%= error %> </li>
+            </ul>
+
+        <% } %>
+        <input type="submit" value="Submit">
+    </form>

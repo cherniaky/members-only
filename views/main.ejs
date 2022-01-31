@@ -3,9 +3,19 @@
         <h1 class="form-header">
             <%= title %>
         </h1>
-        <% if (typeof user !='undefined' ){ %>
-            hi
-        <%}%>
+
+        <div class="links-container">
+            <% if (user) { %>
+                <form action="/log-out" method="post">
+                    <input type="submit" value="Log out">
+                </form>
+               
+                <% } else { %>
+
+                    <a href="/sign-up">Sign up</a>
+                    <a href="/log-in">Log in</a>
+                    <%} %>
+        </div>
     </section>
 
     <% if (message_list.length !=0){ %>
@@ -19,20 +29,17 @@
         <%}else{ %>
             No message yet
             <%} %>
-                <a href="/sign-up">Sign up</a>
-<br>
-<hr>
-            <% if (user) {%>
-                <h1>WELCOME BACK 
-                </h1>
-                <a href="/log-out">LOG OUT</a>
-                <% } else { %>
-                    <h1>please log in</h1>
-                    <form action="/log-in" method="POST">
-                        <label for="username">Username</label>
-                        <input name="username" placeholder="username" type="text" />
-                        <label for="password">Password</label>
-                        <input name="password" type="password" />
-                        <button>Log In</button>
-                    </form>
-                    <%}%>
+
+
+                <hr>
+                <% if (user) {%>
+                    <h1>WELCOME BACK
+                    </h1>
+                    <% if (!user.isMember) { %>
+                        <a href="/become-member"> Become Member</a>
+                        <% } %>
+                            <% if (!user.isAdmin) { %>
+                                <a href="/become-admin">Become Admin</a>
+                                <% } %>
+
+                                    <% } %>

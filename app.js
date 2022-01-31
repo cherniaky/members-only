@@ -30,6 +30,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 const User = require("./models/user");
+
+
 passport.use(
     new LocalStrategy((username, password, done) => {
         User.findOne({ username: username }, (err, user) => {
@@ -49,12 +51,6 @@ passport.use(
                     return done(null, false, { message: "Incorrect password" });
                 }
             });
-
-            // if (user.password !== password) {
-            //     return done(null, false, { message: "Incorrect password" });
-            // }
-
-            // return done(null, user);
         });
     })
 );
@@ -68,6 +64,8 @@ passport.deserializeUser(function (id, done) {
         done(err, user);
     });
 });
+
+
 app.use(
     session({
         secret: "cats",
@@ -87,15 +85,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-// app.use("/users", usersRouter);
-// app.post(
-//     "/log-in",
-//     passport.authenticate("local", {
-//         successRedirect: "/sign-up",
-//         failureRedirect: "/",
-//     })
-// );
+app.use("/", indexRouter );
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
