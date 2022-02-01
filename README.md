@@ -5,4 +5,4 @@ project completed as part of the Node.js lessons provided by <b>The Odin Project
 
 
 ### App Information
-Passwords for **Admin** and **Member** are *membersOnlySuperDuperUserAdmin* and *membersOnlySuperUserMember* respectively.
+Passwords for **Admin** and **Member** are *memberpassword* and *adminpassword* respectively.
