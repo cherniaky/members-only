@@ -1,0 +1,24 @@
+<% layout('layout') -%>
+    <section class="title">
+        <h1 class="form-header">
+            <%= title %>
+        </h1>
+    </section>
+    <form action="" method="post">
+        <input type="hidden" name="userid" value="<%= user._id %>">
+        <fieldset>
+            <legend>
+               Title
+            </legend>
+
+            <input required type="text" name="title" placeholder="">
+        </fieldset>
+        <fieldset>
+            <legend>
+                Message
+            </legend>
+        
+            <input required type="text" name="text" placeholder="">
+        </fieldset>
+        <input type="submit" value="Submit">
+    </form>

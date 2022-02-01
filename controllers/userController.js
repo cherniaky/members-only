@@ -7,6 +7,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const { body, validationResult } = require("express-validator");
 
 var mongoose = require("mongoose");
+const Message = require("../models/message");
 
 exports.user_sign_up_get = function (req, res, next) {
     res.render("sign-up-form", { title: "Sign Up" });
@@ -104,6 +105,57 @@ exports.user_become_member_post = function (req, res, next) {
             res.redirect("/");
         });
     } else {
-        res.render("become-form", { title: "Become Member", type: "Member" ,error:"Wrong password" });
+        res.render("become-form", {
+            title: "Become Member",
+            type: "Member",
+            error: "Wrong password",
+        });
     }
 };
+
+exports.user_become_admin_get = function (req, res, next) {
+    res.render("become-form", { title: "Become Admin", type: "Admin" });
+};
+
+exports.user_become_admin_post = function (req, res, next) {
+    if (req.body.memberpassword == "adminpassword") {
+        var user = new User({
+            username: req.user.username,
+            password: req.user.password,
+            _id: req.user._id,
+            isMember: req.user.isMember,
+            isAdmin: true,
+        });
+
+        User.findByIdAndUpdate(req.user._id, user, {}, function (err, theuser) {
+            if (err) return next(err);
+
+            res.redirect("/");
+        });
+    } else {
+        res.render("become-form", {
+            title: "Become Admin",
+            type: "Admin",
+            error: "Wrong password",
+        });
+    }
+};
+
+exports.user_post_message_get = function (req, res, next) {
+    res.render("message-form", { title: "New message!", user: req.user });
+};
+
+exports.user_post_message_post = (req, res, next) => {
+   
+    var message = new Message({
+        title: req.body.title,
+        text: req.body.text,
+        author: req.body.userid,
+        date: Date.now(),
+    });
+    message.save(function (err) {
+        if (err) return next(err);
+        res.redirect("/");
+    });
+};
+

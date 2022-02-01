@@ -9,7 +9,7 @@
                 <form action="/log-out" method="post">
                     <input type="submit" value="Log out">
                 </form>
-               
+                <a href="/post-message">Post message</a>
                 <% } else { %>
 
                     <a href="/sign-up">Sign up</a>
@@ -23,6 +23,18 @@
             <% message_list.forEach( function(message){ %>
                 <li>
                     <%=message.text%>
+                        <% if (user && user.isMember) { %>
+                            <%=message.author.username%>
+                                <% } else { %>
+                                    Unknown
+                                    <% } %>
+                                        <% if (user && user.isAdmin) { %>
+                                            <form action="/message_delete" method="post">
+                                                <input type="hidden" name="messageid" value="<%=message._id%>">
+                                                <input type="submit" value="Delete">
+                                            </form>
+                                            <% } %>
+
                 </li>
                 <%})%>
         </ul>
