@@ -17,18 +17,21 @@ const userController = require("../controllers/userController");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-    Message.find().populate('author').exec(function (err, message_list) {
-        if (err) return next(err);
+    Message.find()
+        .populate("author")
+        .sort({ date: -1 })
+        .exec(function (err, message_list) {
+            if (err) return next(err);
 
-        //console.log(req.user);
-        //console.log(req.session.passport);
-       // console.log(Date.now());
-        res.render("main", {
-            title: "Messages",
-            message_list: message_list,
-            user: req.user,
+            //console.log(req.user);
+            //console.log(req.session.passport);
+            // console.log(Date.now());
+            res.render("main", {
+                title: "Messages",
+                message_list: message_list,
+                user: req.user,
+            });
         });
-    });
 });
 
 router.get("/sign-up", userController.user_sign_up_get);

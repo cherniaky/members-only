@@ -7,17 +7,46 @@
   <title>
     <%= title %>
   </title>
-  <link rel="stylesheet" href="/stylesheets/normalize.css" />
-  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="/stylesheets/output.css" />
+  <link rel="stylesheet" href="/stylesheets/custom.css">
   <script src="https://kit.fontawesome.com/408812bb37.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
-  
-    <div class="content-container">
-      <%- body -%>
+<body class="bg-gray-400">
+  <header class="header flex flex-row justify-between h-14  content-center bg-black text-white">
+
+    <h1 class="ml-11 flex self-center h-min hover:cursor-pointer hover:opacity-70">
+      <a href="/">
+        Members Only</a>
+    </h1>
+
+    <div class="flex w-2/5 min-w-max  justify-end content-center mr-12 ">
+      <% if (typeof user !='undefined' ) { %>
+
+        <% if (!user.isMember) { %>
+          <a class="self-center  hover:text-blue-300" href="/become-member"> Become Member</a>
+          <% } %>
+            <% if (!user.isAdmin) { %>
+              <a class="self-center  hover:text-blue-300" href="/become-admin">Become Admin</a>
+              <% } %>
+                <a class="max-w-fit self-center hover:text-blue-300" href="/post-message">Post message</a>
+
+                <form class="flex content-center" action="/log-out " method="post">
+                  <input class="hover:cursor-pointer hover:text-blue-300" type="submit" value="Log out">
+                </form>
+
+                <% } else { %>
+
+                  <a class="self-center  hover:text-blue-300" href="/sign-up">Sign up</a>
+                  <a class="self-center  hover:text-blue-300 " href="/log-in">Log in</a>
+                  <%} %>
     </div>
-    
+
+  </header>
+  <div class="content-container w-full flex flex-col content-center h-full text-center">
+    <%- body -%>
+  </div>
+
 </body>
 
 </html>

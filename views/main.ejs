@@ -1,37 +1,26 @@
 <% layout('layout') -%>
-    <section class="title">
-        <h1 class="form-header">
-            <%= title %>
-        </h1>
+   
 
-        <div class="links-container">
-            <% if (user) { %>
-                <form action="/log-out" method="post">
-                    <input type="submit" value="Log out">
-                </form>
-                <a href="/post-message">Post message</a>
-                <% } else { %>
-
-                    <a href="/sign-up">Sign up</a>
-                    <a href="/log-in">Log in</a>
-                    <%} %>
-        </div>
-    </section>
+       
 
     <% if (message_list.length !=0){ %>
-        <ul>
+        <ul class="messages">
             <% message_list.forEach( function(message){ %>
-                <li>
-                    <%=message.text%>
+                <li class="m-card">
+                    <div class="m-title"> <%= message.title %> </div>
+
+                    <div class=""><%=message.text%></div>
+                        <div class="m-bottom self-end">
                         <% if (user && user.isMember) { %>
                             <%=message.author.username%>
                                 <% } else { %>
                                     Unknown
                                     <% } %>
+                        </div>
                                         <% if (user && user.isAdmin) { %>
                                             <form action="/message_delete" method="post">
                                                 <input type="hidden" name="messageid" value="<%=message._id%>">
-                                                <input type="submit" value="Delete">
+                                                <input class="m-bottom delete" type="submit" value="Delete">
                                             </form>
                                             <% } %>
 
@@ -43,15 +32,5 @@
             <%} %>
 
 
-                <hr>
-                <% if (user) {%>
-                    <h1>WELCOME BACK
-                    </h1>
-                    <% if (!user.isMember) { %>
-                        <a href="/become-member"> Become Member</a>
-                        <% } %>
-                            <% if (!user.isAdmin) { %>
-                                <a href="/become-admin">Become Admin</a>
-                                <% } %>
-
-                                    <% } %>
+               
+               

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .header a{
+      margin:10px;
+  }
+  .m-card{
+      
+      background-color: black;
+      border-radius:5px;
+  }
+}

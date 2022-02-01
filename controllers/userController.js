@@ -10,7 +10,7 @@ var mongoose = require("mongoose");
 const Message = require("../models/message");
 
 exports.user_sign_up_get = function (req, res, next) {
-    res.render("sign-up-form", { title: "Sign Up" });
+    res.render("sign-up-form", { title: "Sign Up", user: req.user });
 };
 
 // Handle Category create on POST.
@@ -61,6 +61,7 @@ exports.user_sign_up_post = [
             if (!errors.isEmpty()) {
                 res.render("sign-up-form", {
                     title: "Sign Up",
+                    user: req.user,
                     errors: errors.array(),
                 });
 
@@ -82,11 +83,15 @@ exports.user_sign_up_post = [
 ];
 
 exports.user_log_in_get = function (req, res, next) {
-    res.render("log-in-form", { title: "Log in" });
+    res.render("log-in-form", { title: "Log in", user: req.user });
 };
 
 exports.user_become_member_get = function (req, res, next) {
-    res.render("become-form", { title: "Become Member", type: "Member" });
+    res.render("become-form", {
+        title: "Become Member",
+        type: "Member",
+        user: req.user,
+    });
 };
 
 exports.user_become_member_post = function (req, res, next) {
@@ -109,12 +114,17 @@ exports.user_become_member_post = function (req, res, next) {
             title: "Become Member",
             type: "Member",
             error: "Wrong password",
+            user: req.user
         });
     }
 };
 
 exports.user_become_admin_get = function (req, res, next) {
-    res.render("become-form", { title: "Become Admin", type: "Admin" });
+    res.render("become-form", {
+        title: "Become Admin",
+        type: "Admin",
+        user: req.user,
+    });
 };
 
 exports.user_become_admin_post = function (req, res, next) {
@@ -136,6 +146,7 @@ exports.user_become_admin_post = function (req, res, next) {
         res.render("become-form", {
             title: "Become Admin",
             type: "Admin",
+            user: req.user,
             error: "Wrong password",
         });
     }
