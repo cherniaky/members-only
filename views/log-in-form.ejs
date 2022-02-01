@@ -5,12 +5,11 @@
         </h1>
     </section>
 
-    <section class="form-section">
-
-        <form action="/log-in" method="POST">
+   
+        <form class="form" action="/log-in" method="POST">
             <fieldset>
                 <legend>USERNAME</legend>
-                <input required name="username" placeholder="username" type="text" maxlength="30" />
+                <input required name="username"  type="text" maxlength="30" />
             </fieldset>
 
             <fieldset>
@@ -18,7 +17,7 @@
                 <input required name="password" id="password" maxlength="30" />
             </fieldset>
 
-            <button>Log In</button>
+            <input type="submit" class="bg-slate-500 m-4 hover:cursor-pointer text-white " value="Log in" />
 
         </form>
 
@@ -26,4 +25,4 @@
 
 
         <a class="cancel block" href="/">Cancel</a>
-    </section>
+   

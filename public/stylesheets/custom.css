@@ -34,3 +34,31 @@
       background-color: rgb(192, 93, 93);
       cursor: pointer;
   }
+  .form-header{
+      font-size: 25px;
+      margin: 20px;
+  }
+  legend{
+      margin: 5px;
+  }
+  form input{
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+  }
+  .form{
+      width: 60%;
+      padding: 20px 0;
+      border-radius: 6px;
+      align-self: center;
+      margin-bottom: 0;
+  }
+  .cancel{
+      border-radius: 5px;
+    border: none;
+    padding: 5px;
+    width: min-content;
+    align-self: center;
+    color: white;
+    background-color: rgb(170, 83, 83);
+  }

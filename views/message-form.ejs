@@ -1,10 +1,10 @@
 <% layout('layout') -%>
     <section class="title">
         <h1 class="form-header">
-            <%= title %>
+           Create Message
         </h1>
     </section>
-    <form action="" method="post">
+    <form class=" form" action="" method="post">
         <input type="hidden" name="userid" value="<%= user._id %>">
         <fieldset>
             <legend>
@@ -20,5 +20,5 @@
         
             <input required type="text" name="text" placeholder="">
         </fieldset>
-        <input type="submit" value="Submit">
+        <input class="bg-slate-500 m-4 hover:cursor-pointer text-white" type="submit" value="Submit">
     </form>
