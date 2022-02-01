@@ -2,6 +2,9 @@
     "name": "members",
     "version": "0.0.0",
     "private": true,
+    "engines": {
+        "node": "14.16.1"
+    },
     "scripts": {
         "start": "node ./bin/www",
         "devstart": "nodemon ./bin/www",
